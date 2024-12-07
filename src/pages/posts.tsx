@@ -1,17 +1,16 @@
+import { PostComponent } from "modules/posts/Post";
 import React from "react";
 import { usePostsQuery } from "stores/queries/usePostsQuery";
 
 export const Posts = () => {
   console.log("posts");
   const { data, isLoading } = usePostsQuery();
+  console.log("data: ", data);
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {isLoading && <p>Loading...</p>}
       {data?.map((post) => (
-        <div key={post.id}>
-          <h2>{post.author.full_name}</h2>
-          <p>{post.content}</p>
-        </div>
+        <PostComponent key={post.id} post={post} />
       ))}
     </div>
   );
