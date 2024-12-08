@@ -14,7 +14,7 @@ export const PostComponent: React.FC<PostProps> = ({ post }) => {
   const { mutate: likeMutation, isPending } = useLikeMutation(setIsLiked);
 
   const onLike = () => {
-    likeMutation({ postId: post.id, isLiked });
+    likeMutation({ postId: post.id, authorUsername: post.author.username, isLiked });
   };
 
   return (

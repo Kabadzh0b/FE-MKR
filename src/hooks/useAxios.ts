@@ -1,11 +1,9 @@
 import axios, { AxiosInstance } from "axios";
+import { useAuthStore } from "stores/stores/authStore";
 
 export const useAxios = (): AxiosInstance => {
   const axiosInstance = axios.create();
-
-  // Retrieve credentials from local storage or use hardcoded ones (for demonstration)
-  const username = "user_1"; // Replace with actual username
-  const password = "12345678"; // Replace with actual password
+  const { username, password } = useAuthStore();
 
   // Encode username and password into base64 format for basic auth
   const authHeader = "Basic " + btoa(`${username}:${password}`);
