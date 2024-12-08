@@ -1,16 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { Post } from "dataModels/Post";
 import { useAxios } from "hooks/useAxios";
-import { useAuthStore } from "../stores/authStore";
 
-export const usePostsQuery = () => {
+export const usePostsQuery = (username: string) => {
   const axios = useAxios();
-  const { username } = useAuthStore();
+
   return useQuery({
-    queryKey: ["posts"],
+    queryKey: ["posts", username],
     queryFn: async () => {
       const { data } = await axios.get<Post[]>(`/users/${username}/posts`);
       return data;
     },
+    retry: false,
+    enabled: !!username,
   });
 };
