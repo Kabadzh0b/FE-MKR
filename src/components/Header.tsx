@@ -4,7 +4,7 @@ import { useAuthStore } from "stores/stores/authStore";
 
 export const Header = () => {
   const [inputValue, setInputValue] = useState("");
-  const { isLoggedIn, username } = useAuthStore();
+  const { isLoggedIn, username, logout } = useAuthStore();
   const [, setSearchParams] = useSearchParams();
   const onSubmit = (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -33,7 +33,10 @@ export const Header = () => {
           <div className="text-xl font-semibold text-white">
             {username} posts
           </div>
-          <button className="absolute right-4 ml-auto text-white border-2 border-white hover:bg-white hover:text-blue-500 rounded-lg p-4 mr-4">
+          <button
+            onClick={logout}
+            className="absolute right-4 ml-auto text-white border-2 border-white hover:bg-white hover:text-blue-500 rounded-lg p-4 mr-4"
+          >
             Logout
           </button>
         </div>
